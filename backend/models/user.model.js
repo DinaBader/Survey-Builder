@@ -30,8 +30,7 @@ const userSchema = new mongoose.Schema({
         default:0,
     },
     image:{
-        type:String,
-        data:Buffer,
+        type:Buffer,
     },
     Role:{
        type:mongoose.Schema.Types.ObjectId,
