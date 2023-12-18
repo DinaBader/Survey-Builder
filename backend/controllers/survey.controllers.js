@@ -1,4 +1,4 @@
-const Survey=require("../models/survery.model");
+const Survey=require("../models/survey.model");
 
 const addSurvey=async(req,res)=>{
     const {title, description}=req.body;

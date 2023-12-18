@@ -14,6 +14,9 @@ const surveyRoutes=require("../backend/routes/survey.routes")
 const { authMiddleware } = require("./middlewares/auth.middleware");
 app.use("/survey",authMiddleware,surveyRoutes);
 
+const questionRoutes=require("../backend/routes/question.routes");
+app.use("/question",authMiddleware,questionRoutes);
+
 app.listen(8000,()=>{
     console.log("Server listening on PORT: ",8000);
     connectToMongoDB();
