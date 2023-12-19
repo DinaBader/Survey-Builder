@@ -6,6 +6,7 @@ const saveAnswer = async(req,res)=>{
         const answer= await Answer.create({
             text,
             userId:req.user._id,
+            
         });
         res.status(200).send({answer});
     }catch(error){
