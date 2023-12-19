@@ -3,6 +3,9 @@ const {connectToMongoDB} =require("./configs/mongoDb.configs");
 const app=express();
 app.use(express.json());
 require("dotenv").config();
+var cors = require('cors')
+
+app.use(cors()) 
 
 const authRoutes = require("../backend/routes/auth.routs");
 app.use("/auth", authRoutes);

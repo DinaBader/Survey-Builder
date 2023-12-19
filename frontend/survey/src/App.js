@@ -1,11 +1,20 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Index";
-import Form from "./pages/Landing/Index"
+import Login from "./pages/Login/Index"
+import Signup from './pages/Signup/Index';
+import AdminDashboard from "./pages/AdminDashboard/Index"
 function App() {
   return (
     <>
+    <Router>
     <Navbar/>
-    <Form/>
+      <Routes>
+        <Route path="/" element={<Login/>}/>
+        <Route path="/signin" element={<Signup/>} />
+        <Route path="/AdminDahsboard" element={<AdminDashboard/>}/>
+      </Routes>
+    </Router>
     </>
   );
 }

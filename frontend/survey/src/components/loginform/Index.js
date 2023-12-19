@@ -1,53 +1,66 @@
 import {useState,React} from 'react';
 import "./style.css";
-import axios from 'axios'
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 function Index() {
-    const [username, setUsername]=useState('');
+    const [userName, setUsername]=useState('');
     const [password,setPassword]=useState('');
+    const navigate=useNavigate();
     const handleUsenameChange = (e)=>{
         setUsername(e.target.value);
     }
     const handlePasswordChange = (e)=>{
         setPassword(e.target.value);
     }
-
+    const navigateToSignin = ()=>{
+        navigate('/signin');
+    }
+    const navigateToDashboard = (role)=>{
+        if(role=="657edc7c822caeaa5743830b"){
+            navigate('/AdminDahsboard');
+        }
+        else{
+            navigate('/UserDashboard');
+        }
+    }
     const handleSubmit = (e)=>{
         e.preventDefault();
         axios
         .post(
-            "http://localhost:8000/auth/login",
+            "http://127.0.0.1:8000/auth/login",
             {
-                username,
-                password,
+                userName,
+                password
             },
             {
                 headers:{
-                    "Access-Control-Allow-Origin":"*",
                     "Content-Type":"application/json",
-                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
                 },
             }
         ).then((res)=>{
+            const { token, user } = res.data;
             localStorage.setItem("jwt",res.data.token);
             localStorage.setItem("user",JSON.stringify(res.data.user));
-            console.log("logged in!");
+            const role=user.Role;
+            navigateToDashboard(role);
         }).catch((error)=>{
             setUsername("");
             setPassword("");
+            console.log("wrong")
             return;
         })
     }
 
     return (
-       <div>
-        <h1>Login</h1>
+       <div className='container'>
         <form onSubmit={handleSubmit}>
+        <h1>Login</h1>
             <label>
                 Username:
             </label>
             <input
             type="text"
-            value={username}
+            value={userName}
             onChange={handleUsenameChange}
             />
             <br/>
@@ -60,7 +73,8 @@ function Index() {
             onChange={handlePasswordChange}
             />
             <br/>
-            <button type="submit"> Login </button>
+            <button type="submit" className="btn"> Login </button>
+            <button type="submit" className='btn' onClick={navigateToSignin}>Signin</button>
         </form>
         </div>
   )
