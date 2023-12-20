@@ -2,20 +2,24 @@ const Question = require("../models/question.model");
 const Survey = require("../models/survey.model"); 
 
 const addQuestion = async(req,res)=>{
-    const {description , surveyName} = req.body
+    const surveyId = req.params.id; 
+    const {description} = req.body
     try{
-        const survey = await Survey.findOne({ title: surveyName });
-        if (!survey) {
-            return res.status(404).send("Survey not found");
-        }
         const question=await Question.create({
             description,
-            surveyId: survey._id,
-            surveyName:survey.title
+            surveyId: surveyId,
         });
         res.status(200).send({question});
     }catch(error){
-        res.status(500).send({error});
+        console.error('Error fetching questions by ID:', error);
+
+        // Send a more detailed error response
+        res.status(500).send({
+            error: {
+                message: 'Internal Server Error',
+                details: error.message, // Include the error message for more details
+            },
+        });
     }
 };
 
@@ -46,8 +50,24 @@ const getQuestion = async(req,res)=>{
     }
 }
 
+const getQuestionbyid=async(req,res)=>{
+    const surveyid=req.params.id; 
+    try{
+        const result=await Question.find({surveyId:surveyid});
+        res.status(200).send({result});
+    }catch (error) {
+        res.status(500).send({
+            error: {
+                message: 'Error',
+                details: error.message, 
+            },
+        });
+    }
+}
+
 module.exports = {
     addQuestion,
     removeQuestion,
-    getQuestion
+    getQuestion,
+    getQuestionbyid,
 };
