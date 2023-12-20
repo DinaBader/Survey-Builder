@@ -1,6 +1,7 @@
 import {React,useState} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import "./style.css"
 function AddSurvey() {
   const [title,setTitle]=useState('')
   const [description,setDescription]=useState('');
@@ -35,18 +36,20 @@ function AddSurvey() {
     
   }
   return (
-    <div>
+    <div class="question-container">
       <label>Title:</label>
       <input 
       value={title}
       onChange={handleTitleChange}
+      className='box'
       />
       <label>Description</label>
       <input
       value={description}
       onChange={handleDescriptionChange}
+      className='box'
       />
-      <button type="submit"onClick={handleSubmit}>Submit</button>
+      <button className='btn small' type="submit"onClick={handleSubmit}>Submit</button>
     </div>
   )
 }

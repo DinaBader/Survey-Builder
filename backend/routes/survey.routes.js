@@ -5,5 +5,4 @@ const router=express.Router();
 router.post("/addSurvey",addSurvey);
 router.get("/getSurveys",getSurvey);
 
-
 module.exports=router;

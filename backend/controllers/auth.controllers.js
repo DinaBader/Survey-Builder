@@ -14,8 +14,7 @@ const login=async (req,res)=>{
     const isValidPassword = await bcrypt.compare(password,user.password);
     if(!isValidPassword) res.status(400).send({message:"Invalid username/password"});
 
-    const {password: hashedPassword, _id, ...userDetails}=user.toJSON();
-
+    const {password: hashedPassword ,...userDetails}=user.toJSON();
     //generate jwt token
     const token = jwt.sign(
         {
@@ -48,8 +47,17 @@ const register = async (req, res) => {
       });
   
       await user.save();
-  
-      res.status(200).send({ user });
+      const { password: hashedPassword, ...userDetails } = user.toJSON();
+      const token = jwt.sign(
+        {
+          ...userDetails,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "2 days",
+        }
+      );
+      res.status(200).send({ user:userDetails,token });
       return;
     } catch (e) {
       console.error(e)

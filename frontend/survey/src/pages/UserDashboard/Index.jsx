@@ -4,11 +4,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function Index() {
     const navigate = useNavigate();
-
-    const navigateAddSurvey = () => {
-        navigate('/addsurvey');
-    };
     const [surveyinfo, setSurveyInfo] = useState([]);
+    const navigateToAnswers=(surveyId)=>{
+      localStorage.setItem("surveyid",surveyId);
+      navigate("/Answers")
+  }
 
     function getSurvey() {
         axios
@@ -30,10 +30,6 @@ function Index() {
     useEffect(() => {
         getSurvey();
     }, []);
-    const navigateToAddQuestion=(surveyId)=>{
-        localStorage.setItem("surveyid",surveyId);
-        navigate("/Questions")
-    }
     return (
         <>
             <div className='container'>
@@ -43,10 +39,9 @@ function Index() {
                             title={survey.title}
                             description={survey.description}
                         />
-                        <button className='btn' onClick={() => navigateToAddQuestion(survey._id)}>Add Question</button>
+                        <button className='btn' onClick={() => navigateToAnswers(survey._id)}>Answer</button>
                     </div>
                 ))}
-                <button className='btn small' onClick={navigateAddSurvey}>Add Survey</button>
             </div>
 
         </>

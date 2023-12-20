@@ -31,6 +31,14 @@ function Index() {
     const navigateToLogin = ()=>{
         navigate('/');
     }
+    const navigateToDashboard = (role)=>{
+        if(role=="657edc7c822caeaa5743830b"){
+            navigate('/AdminDahsboard');
+        }
+        else{
+            navigate('/UserDashboard');
+        }
+    }
     const handleSubmit = (e)=>{
         e.preventDefault();
         axios
@@ -50,12 +58,19 @@ function Index() {
                 },
             }
         ).then((res)=>{
+            const { token, user } = res.data;
             localStorage.setItem("jwt",res.data.token);
             localStorage.setItem("user",JSON.stringify(res.data.user));
-            console.log("logged in!");
+            const role=user.Role;
+            navigateToDashboard(role);
+            
         }).catch((error)=>{
             setUsername("");
             setPassword("");
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setRole("");
             console.log("wrong")
             return;
         })

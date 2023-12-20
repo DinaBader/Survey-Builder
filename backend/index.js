@@ -20,6 +20,9 @@ app.use("/survey",authMiddleware,surveyRoutes);
 const questionRoutes=require("../backend/routes/question.routes");
 app.use("/question",authMiddleware,questionRoutes);
 
+const answerRoutes=require("../backend/routes/answer.routes");
+app.use("/answer",authMiddleware,answerRoutes);
+
 app.listen(8000,()=>{
     console.log("Server listening on PORT: ",8000);
     connectToMongoDB();

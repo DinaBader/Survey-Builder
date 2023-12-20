@@ -6,6 +6,8 @@ import Signup from './pages/Signup/Index';
 import AdminDashboard from "./pages/AdminDashboard/Index"
 import AddSurvey from "./pages/AddSurvey/AddSurvey"
 import Questions from './pages/Question/Questions';
+import UserDashboard from "./pages/UserDashboard/Index";
+import Answers from './pages/Answers/Index'
 function App() {
   return (
     <>
@@ -17,6 +19,8 @@ function App() {
         <Route path="/AdminDahsboard" element={<AdminDashboard/>}/>
         <Route path="/addsurvey" element={<AddSurvey/>}/>
         <Route path="/Questions" element={<Questions/>}/>
+        <Route path="/UserDashboard" element={<UserDashboard/>}/>
+        <Route path="/Answers" element={<Answers/>}/>
       </Routes>
     </Router>
     </>
