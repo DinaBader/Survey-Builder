@@ -8,6 +8,7 @@ import AddSurvey from "./pages/AddSurvey/AddSurvey"
 import Questions from './pages/Question/Questions';
 import UserDashboard from "./pages/UserDashboard/Index";
 import Answers from './pages/Answers/Index'
+import UserProfile from './pages/UserProfile/index'
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/Questions" element={<Questions/>}/>
         <Route path="/UserDashboard" element={<UserDashboard/>}/>
         <Route path="/Answers" element={<Answers/>}/>
+        <Route path="/UserProfile" element={<UserProfile/>}/>
       </Routes>
     </Router>
     </>

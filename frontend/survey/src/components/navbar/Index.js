@@ -31,9 +31,10 @@ function Navbar() {
       <h1>Survey Manager      
           {isLoggedIn && (
             <div>
-          <button className='btn small' onClick={handleLogout}>Logout</button>
-          <button className='btn small' onClick={navigateToUserProfile}>Profile</button>
           <button className='btn small' onClick={navigateToHome}>Home</button>
+          <button className='btn small' onClick={navigateToUserProfile}>Profile</button>
+          <button className='btn small' onClick={handleLogout}>Logout</button>
+
           </div>
           )}
       </h1>
